@@ -72,6 +72,19 @@ url.origin === "https://fonts.gstatic.com", new NetworkFirst({
   ],
 }))
 
+registerRoute(
+  ({url}) => url.origin.includes('bwacharity.fly.dev'),
+  new NetworkFirst({
+    cacheName: 'api-arrive-data',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 30,
+        maxAgeSeconds: 360,
+      }),
+    ],
+  })
+);
+
 self.addEventListener('install', function(event){
   console.log("Installing");
 
